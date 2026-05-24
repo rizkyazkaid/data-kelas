@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Manajemen Data Siswa</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Manajemen Data Siswa</h1>
+            <p>Sistem Informasi Kelas</p>
+        </header>
+
+        <nav class="navbar">
+            <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
+            <button class="nav-btn" data-tab="students">Daftar Siswa</button>
+            <button class="nav-btn" data-tab="classes">Kelas</button>
+            <button class="nav-btn" data-tab="admin">Admin</button>
+        </nav>
+
+        <!-- Dashboard Tab -->
+        <section id="dashboard" class="tab-content active">
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <h3>Total Siswa</h3>
+                    <p class="stat-number" id="totalStudents">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Kelas</h3>
+                    <p class="stat-number" id="totalClasses">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Kelas X</h3>
+                    <p class="stat-number" id="classX">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Kelas XI</h3>
+                    <p class="stat-number" id="classXI">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Kelas XII</h3>
+                    <p class="stat-number" id="classXII">0</p>
+                </div>
+            </div>
+            <div class="chart-section">
+                <h2>Distribusi Siswa per Kelas</h2>
+                <canvas id="classChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Students Tab -->
+        <section id="students" class="tab-content">
+            <div class="section-header">
+                <h2>Daftar Siswa</h2>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Cari siswa...">
+                    <select id="classFilter">
+                        <option value="">Semua Kelas</option>
+                        <option value="01">Kelas X</option>
+                        <option value="02">Kelas XI</option>
+                        <option value="03">Kelas XII</option>
+                    </select>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table id="studentsTable" class="data-table">
+                    <thead>
+                        <tr>
+                            <th>No. ID</th>
+                            <th>Nama Siswa</th>
+                            <th>Kelas</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Classes Tab -->
+        <section id="classes" class="tab-content">
+            <div class="section-header">
+                <h2>Manajemen Kelas</h2>
+            </div>
+            <div class="classes-grid">
+                <div class="class-card">
+                    <h3>Kelas X</h3>
+                    <p>Kode: 01</p>
+                    <p class="student-count" id="count-01">0 Siswa</p>
+                </div>
+                <div class="class-card">
+                    <h3>Kelas XI</h3>
+                    <p>Kode: 02</p>
+                    <p class="student-count" id="count-02">0 Siswa</p>
+                </div>
+                <div class="class-card">
+                    <h3>Kelas XII</h3>
+                    <p>Kode: 03</p>
+                    <p class="student-count" id="count-03">0 Siswa</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Tab -->
+        <section id="admin" class="tab-content">
+            <div class="admin-panel">
+                <h2>Panel Admin</h2>
+                <div class="login-form" id="loginForm">
+                    <h3>Login Admin</h3>
+                    <input type="password" id="adminPassword" placeholder="Masukkan password admin">
+                    <button onclick="loginAdmin()">Login</button>
+                </div>
+                <div class="admin-content" id="adminContent" style="display: none;">
+                    <div class="admin-actions">
+                        <h3>Tindakan Admin</h3>
+                        <button onclick="exportData()" class="btn-primary">📥 Export Data (CSV)</button>
+                        <button onclick="resetData()" class="btn-danger">🔄 Reset Data</button>
+                    </div>
+                    <div class="admin-stats">
+                        <h3>Statistik Sistem</h3>
+                        <p>Total Data Siswa: <strong id="adminTotalStudents">0</strong></p>
+                        <p>Total Akun: <strong id="adminTotalAccounts">0</strong></p>
+                        <p>Terakhir Diperbarui: <strong id="lastUpdate">-</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal for Student Details -->
+    <div id="studentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Detail Siswa</h2>
+            <div id="modalBody">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
